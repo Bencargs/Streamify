@@ -21,12 +21,12 @@ namespace StreamServer
 
             app.Run(async (context) =>
             {
-                var stream = StreamAudio();
+                var stream = GetAudioStream();
                 await stream.ExecuteResultAsync(context);
             });
         }
 
-        private PushStreamResult StreamAudio()
+        private PushStreamResult GetAudioStream()
         {
             System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(MusicPath);
             foreach (System.IO.FileInfo fi in di.GetFiles("*.mp3"))

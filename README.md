@@ -11,7 +11,7 @@ and have a client call that hosted endpoint, decode and play the stream as audio
 I unimaginatively name it streamify.
 
 ## Demo:
-[![Watch the video](https://github.com/Bencargs/Streamify/blob/master/Content/preview.png)](https://github.com/Bencargs/Streamify/blob/master/Content/2C5jZIVNe3.mp4)
+[![Watch the video](https://github.com/Bencargs/Streamify/blob/master/Content/preview.png)](https://i.imgur.com/SzLAeu9.mp4)
 
 
 ### To do:

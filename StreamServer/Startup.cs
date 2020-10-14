@@ -1,40 +1,31 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace StreamServer
 {
     public class Startup
     {
-        private const string MusicPath = @"C:\Source\Streamify";
-
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
+            services.AddControllers();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Run(async (context) =>
-            {
-                var stream = GetAudioStream();
-                await stream.ExecuteResultAsync(context);
-            });
-        }
+            app.UseRouting();
 
-        private PushStreamResult GetAudioStream()
-        {
-            System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(MusicPath);
-            foreach (System.IO.FileInfo fi in di.GetFiles("*.mp3"))
+            app.UseEndpoints(endpoints =>
             {
-                var audio = new AudioStream(fi.FullName);
-                return new PushStreamResult(audio.WriteAudioStream, "audio/mpeg");
-            }
-            return null;
+                endpoints.MapControllers();
+            });
         }
     }
 }
